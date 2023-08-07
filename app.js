@@ -32,6 +32,12 @@ function addItem(e) {
                 <button class="delete-btn"><i class="fas fa-trash"></i></button>
             </div>
         `
+
+        const deleteBtn = element.querySelector('.delete-btn')
+        const editBtn = element.querySelector('.edit-btn')
+        deleteBtn.addEventListener('click', deleteItem)
+        editBtn.addEventListener('click', editItem)
+
         list.appendChild(element)
         displayAlert('Item Added', 'success')
         container.classList.add('show-container')
@@ -68,6 +74,22 @@ function clearItems() {
     //localStorage.removeItem('list')
 }
 
+function deleteItem(e) {
+    const element = e.currentTarget.parentElement.parentElement
+    const id = element.dataset.id
+    list.removeChild(element)
+    if(list.children.length === 0) {
+        container.classList.remove('show-container')
+    }
+    displayAlert('Item removed', 'danger')
+    setBackToDefualt()
+    //removeFromLocalStorage(id)
+}
+
+function editItem() {
+    console.log('Editing item')
+}
+
 function setBackToDefualt() {
     grocery.value = ''
     editFlag = false
@@ -77,4 +99,8 @@ function setBackToDefualt() {
 
 function addToLocalStorage(id, value) {
     console.log("Added to local storage");
+}
+
+function removeFromLocalStorage(id) {
+    
 }
